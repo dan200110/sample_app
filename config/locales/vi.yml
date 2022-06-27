@@ -1,0 +1,39 @@
+vi:
+  title:
+    about: "Về "
+    home: "Trang Chủ"
+    help: "Trợ Giúp"
+    contact: "Liên Hệ"
+    sign_up: "Đăng Ký"
+
+  page_title: "Ruby on Rails Tutorial Sample App"
+
+  layouts:
+    header:
+      home: "Trang chủ"
+      help: "Trợ giúp"
+      login: "Đăng nhập"
+    footer:
+      the: "các"
+      by: "bởi"
+      about: "Về"
+      contact: "Liên hệ"
+      news: "Mới"
+  static_pages:
+    about:
+    contact:
+      contact: "Liên hệ"
+      contact_page: "trang liên hệ"
+      contact_the: "Liên hệ với Hướng dẫn về Ruby on Rails về ứng dụng mẫu tại"
+    help:
+      help: "Trợ giúp"
+      get_help: "Nhận trợ giúp về Hướng dẫn Ruby on Rails tại"
+      to_get_help: "Để nhận trợ giúp về ứng dụng mẫu này, hãy xem phần"
+      rail_turtorial_help_page: "Rail turtorial help page"
+      ruby_on_rails_turtorial_book: "Ruby on rails turtorial book"
+    home:
+      welcome: "Chào mừng đến với Sample App"
+      this_is: "Đây là trang chủ của"
+      sample: "ứng dụng mẫu"
+      signup: "Đăng ký ngay!"
+      rails_href: "Ruby on Rails Tutorial"

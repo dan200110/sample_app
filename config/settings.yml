@@ -1,3 +1,12 @@
+user:
+  valid_email_regex: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  email:
+    email_length_range: 20..255
+  name_validates:
+    name_max_length: 10
+  password_validates:
+    password_min_length: 6
+
 footer:
   rails_link: https://www.railstutorial.org
   michale_link: https://www.michaelhartl.com/

@@ -37,3 +37,20 @@ vi:
       sample: "ứng dụng mẫu"
       signup: "Đăng ký ngay!"
       rails_href: "Ruby on Rails Tutorial"
+
+  users:
+    new:
+      name: "Tên"
+      email: "Email"
+      password: "Mật khẩu"
+      confirmation: "Xác nhận mật khẩu"
+      btn_create: "Tạo tài khoản"
+    show:
+      not_found: "Không tìm thấy user"
+    create:
+      welcome_to: "Chào mừng đến với Sample App!"
+      danger: "Tạo thất bại"
+  shared:
+    error_messages:
+      the_form: "Biểu mẫu chứa"
+      error: "lỗi"

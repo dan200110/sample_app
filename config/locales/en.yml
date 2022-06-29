@@ -13,6 +13,12 @@ en:
       home: "Home"
       help: "Help"
       login: "Login"
+      user: "User"
+      account: "Account"
+      profile: "Profile"
+      settings: "Settings"
+      logout: "Log out"
+      sample_app: "SAMPLE APP"
     footer:
       the: "the"
       by: "by"
@@ -54,3 +60,14 @@ en:
     error_messages:
     the_form: "The form contains"
     error: "error"
+
+  sessions:
+    create:
+      invalid: "Invalid email password combination"
+    new:
+      login: "Log in"
+      email: "Email"
+      password: "Password"
+      btn_login: "Log in"
+      new_user: "New user?"
+      sign_up_now: "Sign up now!"

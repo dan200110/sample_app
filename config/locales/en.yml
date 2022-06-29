@@ -37,3 +37,20 @@ en:
       sample: "sample application"
       signup: "Sign up now!"
       rails_href: "Ruby on Rails Tutorial"
+
+  users:
+    new:
+      name: "Name"
+      email: "Email"
+      password: "Password"
+      confirmation: "Confirmation"
+      btn_create: "Create my account"
+    show:
+      not_found: "Not found user"
+    create:
+      welcome_to: "Welcome to the Sample App!"
+      danger: "Create fail"
+  shared:
+    error_messages:
+    the_form: "The form contains"
+    error: "error"

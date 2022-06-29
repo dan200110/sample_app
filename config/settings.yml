@@ -1,9 +1,9 @@
 user:
-  valid_email_regex: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX: !ruby/regexp /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   email:
-    email_length_range: 20..255
+    email_min_length: 6
   name_validates:
-    name_max_length: 10
+    name_max_length: 50
   password_validates:
     password_min_length: 6
 

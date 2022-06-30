@@ -13,6 +13,12 @@ vi:
       home: "Trang chủ"
       help: "Trợ giúp"
       login: "Đăng nhập"
+      user: "User"
+      account: "Tài khoản"
+      profile: "Hồ sơ"
+      settings: "Cài đặt"
+      logout: "Đăng xuất"
+      sample_app: "SAMPLE APP"
     footer:
       the: "các"
       by: "bởi"
@@ -54,3 +60,14 @@ vi:
     error_messages:
       the_form: "Biểu mẫu chứa"
       error: "lỗi"
+
+  sessions:
+    create:
+      invalid: "Email/mật khẩu không hợp lệ"
+    new:
+      login: "Đăng nhập"
+      email: "Email"
+      password: "Mật khẩu"
+      btn_login: "Đăng nhập"
+      new_user: "Người dùng mới?"
+      sign_up_now: "Đăng ký ngay!"

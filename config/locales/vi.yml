@@ -45,17 +45,39 @@ vi:
       rails_href: "Ruby on Rails Tutorial"
 
   users:
-    new:
+    form:
       name: "Tên"
       email: "Email"
       password: "Mật khẩu"
       confirmation: "Xác nhận mật khẩu"
+    new:
       btn_create: "Tạo tài khoản"
-    show:
-      not_found: "Không tìm thấy user"
+      please_login: "Vui lòng đăng nhập."
+    edit:
+      btn_save: "Lưu thay đổi"
+      title: "Chỉnh sửa người dùng"
+      update_your: "Cập nhật hồ sơ của bạn"
+      change: "Thay đổi"
+    update:
+      profile_updated: "Hồ sơ đã được cập nhật"
+      update_fail: "Cập nhật thất bại"
     create:
       welcome_to: "Chào mừng đến với Sample App!"
       danger: "Tạo thất bại"
+    destroy:
+      user_deleted: "Người dùng đã được xóa"
+      destroy_fail: "Xóa thất bại"
+    before_action:
+      please_login: "Vui lòng đăng nhập."
+      not_found: "Không tìm thấy user"
+      not_correct: "Không đúng user"
+      not_admin: "Bạn không có thẩm quyền"
+    index:
+      title: "Tất cả người dùng"
+      not_found: "Không tìm thấy người dùng"
+    user:
+      delete: "Xóa"
+      you_sure: "Bạn chắc chứ?"
   shared:
     error_messages:
       the_form: "Biểu mẫu chứa"

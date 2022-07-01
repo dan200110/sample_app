@@ -22,3 +22,14 @@ learnenough:
 
 screencasts:
   https://screencasts.railstutorial.org/
+
+helpers:
+  users:
+    size: 80
+
+views:
+  users:
+    user:
+      gavatar_size: 50
+    edit:
+      gavatar_link: https://gravatar.com/emails

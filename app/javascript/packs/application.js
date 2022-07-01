@@ -9,6 +9,9 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 require("jquery")
 import "bootstrap"
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require ("pagy/extras/bootstrap")

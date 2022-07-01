@@ -45,17 +45,39 @@ en:
       rails_href: "Ruby on Rails Tutorial"
 
   users:
-    new:
+    form:
       name: "Name"
       email: "Email"
       password: "Password"
       confirmation: "Confirmation"
+    new:
       btn_create: "Create my account"
-    show:
-      not_found: "Not found user"
+      please_login: "Please log in."
+    edit:
+      btn_save: "Save changes"
+      title: "Edit user"
+      update_your: "Update your profile"
+      change: "change"
+    update:
+      profile_updated: "Profile updated"
+      update_fail: "Update fail"
     create:
       welcome_to: "Welcome to the Sample App!"
       danger: "Create fail"
+    destroy:
+      user_deleted: "User deleted"
+      destroy_fail: "Destroy fail"
+    before_action:
+      please_login: "Please log in."
+      not_found: "Not found user"
+      not_correct: "Not correct user"
+      not_admin: "You don't have Authorization"
+    index:
+      title: "All users"
+      not_found: "Could not found user"
+    user:
+      delete: "delete"
+      you_sure: "You sure?"
   shared:
     error_messages:
     the_form: "The form contains"

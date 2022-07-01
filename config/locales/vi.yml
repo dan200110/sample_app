@@ -96,6 +96,7 @@ vi:
       new_user: "Người dùng mới?"
       sign_up_now: "Đăng ký ngay!"
       remember_me : "Ghi nhớ đăng nhập"
+      forgot_password: "(Quên mật khẩu)"
   account_activations:
     edit:
       account_activated: "Tài khoản đã được kích hoạt"
@@ -106,3 +107,27 @@ vi:
       welcome_to: "Chào mừng bạn đến với Sample App, click vào link bên dưới để kích hoạt tài khoản"
       activate: "Kích hoạt"
       account: "Kích hoạt tài khoản"
+    password_reset:
+      password_r: "Đặt lại mật khẩu"
+      to_reset: "Để đặt lại mật khẩu của bạn, hãy nhấp vào liên kết bên dưới:"
+      reset_password: "Đặt lại mật khẩu"
+      this_link: "Liên kết này sẽ hết hạn sau hai giờ."
+      if_you_did: "Nếu bạn không yêu cầu đặt lại mật khẩu của mình, vui lòng bỏ qua email này và
+mật khẩu của bạn sẽ vẫn như cũ."
+  password_resets:
+    create:
+      email_sent: "Email được gửi kèm theo hướng dẫn đặt lại mật khẩu"
+      email_address: "Không tìm thấy địa chỉ email"
+    update:
+      not_empty: "Không được để trống"
+      password_reset: "Mật khẩu đã được đặt lại"
+      update_fail: "Cập nhật thất bại"
+    check_expiration:
+      password_exprired: "Đặt lại mật khẩu đã hết hạn"
+    edit:
+      reset_password: "Đặt lại mật khẩu"
+      confirmation: "Xác nhận"
+      update_btn: "Cập nhật mật khẩu"
+    new:
+      forgot_password: "Quên mật khẩu"
+      submit_btn: "Nộp"

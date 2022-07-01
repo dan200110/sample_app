@@ -64,6 +64,7 @@ en:
     create:
       welcome_to: "Welcome to the Sample App!"
       danger: "Create fail"
+      check_email: "Please check your email to activate your account."
     destroy:
       user_deleted: "User deleted"
       destroy_fail: "Destroy fail"
@@ -86,6 +87,7 @@ en:
   sessions:
     create:
       invalid: "Invalid email password combination"
+      account_not: "Account not activated. Check your email for the activation link."
     new:
       login: "Log in"
       email: "Email"
@@ -94,3 +96,13 @@ en:
       new_user: "New user?"
       sign_up_now: "Sign up now!"
       remember_me : "Remember me on this computer"
+  account_activations:
+    edit:
+      account_activated: "Account activated!"
+      invalid_activation: "Invalid activation link"
+  user_mailer:
+    account_activation:
+      sample_app: "Sample App"
+      welcome_to: "Welcome to the Sample App! Click on the link below to activate your account:"
+      activate: "Activate"
+      account: "Account activation"

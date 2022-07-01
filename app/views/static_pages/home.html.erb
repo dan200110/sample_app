@@ -1,12 +1,29 @@
 <% provide(:title, t("title.home")) %>
-<div class="center jumbotron">
-   <h1><%= t ".welcome" %></h1>
-   <h2>
-      <%= t ".this_is" %>
-      <%= link_to t(".rails_href"), Settings.footer.rails_link %>
-      <%= t ".sample" %>
-   </h2>
-   <%= link_to t(".signup"), signup_path, class: "btn btn-lg btn-primary" %>
-</div>
-<%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200px"),
-   "https://rubyonrails.org/" %>
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render "shared/user_info" %>
+      </section>
+      <section class="micropost_form">
+        <%= render "shared/micropost_form" %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3><%= t ".micropost_feed" %></h3>
+      <%= render "shared/feed" %>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <h1><%= t ".welcome" %></h1>
+    <h2>
+        <%= t ".this_is" %>
+        <%= link_to t(".rails_href"), Settings.footer.rails_link %>
+        <%= t ".sample" %>
+    </h2>
+    <%= link_to t(".signup"), signup_path, class: "btn btn-lg btn-primary" %>
+  </div>
+  <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200px"),
+    Settings.footer.rails_link %>
+<% end %>

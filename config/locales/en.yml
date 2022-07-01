@@ -43,6 +43,7 @@ en:
       sample: "sample application"
       signup: "Sign up now!"
       rails_href: "Ruby on Rails Tutorial"
+      micropost_feed: "Micropost Feed"
 
   users:
     form:
@@ -73,6 +74,8 @@ en:
       not_found: "Not found user"
       not_correct: "Not correct user"
       not_admin: "You don't have Authorization"
+    show:
+      micropost: "micropost"
     index:
       title: "All users"
       not_found: "Could not found user"
@@ -83,6 +86,12 @@ en:
     error_messages:
     the_form: "The form contains"
     error: "error"
+    micropost_form:
+      compose_new: "Compose new micropost..."
+      post: "Post"
+    user_info:
+      view_my: "view my profile"
+      micropost: "micropost"
 
   sessions:
     create:
@@ -131,3 +140,26 @@ your password will stay as it is."
     new:
       forgot_password: "Forgot password"
       submit_btn: "Submit"
+
+  microposts:
+    create:
+      micropost_created: "Micropost created!"
+    destroy:
+      micropost_deleted: "Micropost deleted"
+      micropost_deleted_fail: "Micropost deleted fail"
+    find_micropost:
+      find_micropost_fail: "Cannot find micropost"
+    micropost:
+      posted: "Posted"
+      ago: "Ago."
+      delete: "Delete"
+      you_sure: "You sure?"
+
+  activerecord:
+    errors:
+      models:
+        micropost:
+          attributes:
+            image:
+              wrong_format: "Must be a valid image format"
+              too_big: "Image size is too big"

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
 
+  scope :latest_user, ->{order(created_at: :desc)}
   USER_ATTRS = %w(name email password password_confirmation).freeze
   before_save :downcase_email
 
@@ -13,7 +14,7 @@ class User < ApplicationRecord
     length: {maximum: Settings.user.name_validates.name_max_length}
 
   validates :password, presence: true,
-    length: {minimum: Settings.user.password_validates.password_min_length}, if: :password
+    length: {minimum: Settings.user.password_validates.password_min_length}, if: :password, allow_nil: true
 
   has_secure_password
 

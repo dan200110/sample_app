@@ -64,6 +64,7 @@ vi:
     create:
       welcome_to: "Chào mừng đến với Sample App!"
       danger: "Tạo thất bại"
+      check_email: "Vui lòng vào email để kích hoạt tài khoản"
     destroy:
       user_deleted: "Người dùng đã được xóa"
       destroy_fail: "Xóa thất bại"
@@ -86,6 +87,7 @@ vi:
   sessions:
     create:
       invalid: "Email/mật khẩu không hợp lệ"
+      account_not: "Tài khoản chưa được kích hoạt. Truy cập email để kích hoạt"
     new:
       login: "Đăng nhập"
       email: "Email"
@@ -94,3 +96,13 @@ vi:
       new_user: "Người dùng mới?"
       sign_up_now: "Đăng ký ngay!"
       remember_me : "Ghi nhớ đăng nhập"
+  account_activations:
+    edit:
+      account_activated: "Tài khoản đã được kích hoạt"
+      invalid_activation: "Liên kết kích hoạt không hợp lệ"
+  user_mailer:
+    account_activation:
+      sample_app: "Sample App"
+      welcome_to: "Chào mừng bạn đến với Sample App, click vào link bên dưới để kích hoạt tài khoản"
+      activate: "Kích hoạt"
+      account: "Kích hoạt tài khoản"

@@ -19,8 +19,13 @@ class SessionsController < ApplicationController
   end
 
   def remember_user user
-    log_in user
-    params[:session][:remember_me] == "1" ? remember(user) : forget(user)
-    redirect_back_or user
+    if user.activated?
+      log_in user
+      params[:session][:remember_me] == "1" ? remember(user) : forget(user)
+      redirect_back_or user
+    else
+      flash[:warning] = t ".account_not"
+      redirect_to root_url
+    end
   end
 end

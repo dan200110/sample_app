@@ -82,6 +82,17 @@ en:
     user:
       delete: "delete"
       you_sure: "You sure?"
+    following:
+      following: "Following"
+    followers:
+      followers: "Followers"
+    follow:
+      follow: "Follow"
+    unfollow:
+      unfollow: "Unfollow"
+    show_follow:
+      view_my: "view my profile"
+      micropost: "Micropost:"
   shared:
     error_messages:
     the_form: "The form contains"
@@ -92,7 +103,9 @@ en:
     user_info:
       view_my: "view my profile"
       micropost: "micropost"
-
+    stats:
+      following: "following"
+      followers: "followers"
   sessions:
     create:
       invalid: "Invalid email password combination"
@@ -163,3 +176,7 @@ your password will stay as it is."
             image:
               wrong_format: "Must be a valid image format"
               too_big: "Image size is too big"
+
+  relationships:
+    follow_fail: "Follow fail"
+    unfollow_fail: "Unfollow fail"

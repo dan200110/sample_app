@@ -7,6 +7,7 @@ class Micropost < ApplicationRecord
   validates :image, content_type: {in: Settings.micropost.image_path, message: :wrong_format},
                   size: {less_than: Settings.micropost.image_size.megabytes, message: :too_big}
   scope :last_posts, ->{order created_at: :desc}
+  scope :by_user_ids, ->(user_id){where user_id: user_id}
 
   def display_image
     image.variant resize_to_limit: Settings.micropost.resize_to_limit

@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   before_action :correct_user, only: %i(edit update)
   before_action :admin_user, only: %i(destroy)
 
-  def show; end
+  def show
+    @pagy, @microposts = pagy @user.microposts
+  end
 
   def new
     @user = User.new

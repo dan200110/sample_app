@@ -43,6 +43,7 @@ vi:
       sample: "ứng dụng mẫu"
       signup: "Đăng ký ngay!"
       rails_href: "Ruby on Rails Tutorial"
+      micropost_feed: "Micropost Feed"
 
   users:
     form:
@@ -79,10 +80,18 @@ vi:
     user:
       delete: "Xóa"
       you_sure: "Bạn chắc chứ?"
+    show:
+      micropost: "micropost"
   shared:
     error_messages:
       the_form: "Biểu mẫu chứa"
       error: "lỗi"
+    micropost_form:
+      compose_new: "Soạn bài viết mới"
+      post: "Đăng"
+    user_info:
+      view_my: "Xem trang cá nhân của tôi"
+      micropost: "bài đăng"
 
   sessions:
     create:
@@ -131,3 +140,26 @@ mật khẩu của bạn sẽ vẫn như cũ."
     new:
       forgot_password: "Quên mật khẩu"
       submit_btn: "Nộp"
+
+  microposts:
+    create:
+      micropost_created: "Bài viết đã được tạo"
+    destroy:
+      micropost_deleted: "Bài viết đã xóa"
+      micropost_deleted_fail: "Xóa bài viết thất bại"
+    find_micropost:
+      find_micropost_fail: "Cannot find micropost"
+    micropost:
+      posted: "Đăng"
+      ago: "trước."
+      delete: "Xóa"
+      you_sure: "Bạn chắc chứ?"
+
+  activerecord:
+    errors:
+      models:
+        micropost:
+          attributes:
+            image:
+              wrong_format: "Phải là định dạng hình ảnh hợp lệ"
+              too_big: "Kích thước hình ảnh quá lớn"

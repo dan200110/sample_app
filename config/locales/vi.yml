@@ -82,6 +82,17 @@ vi:
       you_sure: "Bạn chắc chứ?"
     show:
       micropost: "micropost"
+    following:
+      following: "Following"
+    followers:
+      followers: "Followers"
+    follow:
+      follow: "Follow"
+    unfollow:
+      unfollow: "Unfollow"
+    show_follow:
+      view_my: "Xem trang cá nhân của tôi"
+      micropost: "Micropost"
   shared:
     error_messages:
       the_form: "Biểu mẫu chứa"
@@ -92,7 +103,9 @@ vi:
     user_info:
       view_my: "Xem trang cá nhân của tôi"
       micropost: "bài đăng"
-
+    stats:
+      following: "following"
+      followers: "followers"
   sessions:
     create:
       invalid: "Email/mật khẩu không hợp lệ"
@@ -163,3 +176,7 @@ mật khẩu của bạn sẽ vẫn như cũ."
             image:
               wrong_format: "Phải là định dạng hình ảnh hợp lệ"
               too_big: "Kích thước hình ảnh quá lớn"
+
+  relationships:
+    follow_fail: "Follow fail"
+    unfollow_fail: "Unfollow fail"

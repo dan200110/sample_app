@@ -33,6 +33,7 @@ views:
   users:
     user:
       gavatar_size: 50
+      gavatar_size_30: 30
     edit:
       gavatar_link: https://gravatar.com/emails
 

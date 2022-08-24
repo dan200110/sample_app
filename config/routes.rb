@@ -19,4 +19,18 @@ Rails.application.routes.draw do
     resources :microposts, only: %i(create destroy)
     resources :relationships, only: %i(create destroy)
   end
+
+  concern :api_base do
+    resources :users
+    resources :microposts
+  end
+
+  scope module: "api", path: "api" do
+    scope module: "v1", path: "v1" do
+      post "/login", to: "auth#create"
+      resources :users
+      resources :microposts
+    end
+  end
+
 end

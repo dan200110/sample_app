@@ -75,7 +75,7 @@ module Api
       end
 
       def find_user
-        @user = User.find_by id: params[:id]
+        @user = User.find_by! id: params[:id]
         return if @user
 
         render json: {

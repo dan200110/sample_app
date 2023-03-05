@@ -1,8 +1,8 @@
 class Employee < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
-
+  belongs_to :branch
   scope :latest_employee, ->{order(created_at: :desc)}
-  EMPLOYEE_ATTRS = %w(name email password password_confirmation).freeze
+  EMPLOYEE_ATTRS = %w(name email password password_confirmation branch_id).freeze
   before_save :downcase_email
 
   validates :email, presence: true,

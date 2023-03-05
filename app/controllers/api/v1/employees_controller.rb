@@ -7,23 +7,20 @@ module Api
       before_action :admin_employee, only: %i(destroy)
 
       def index
-        @pagy, @employees = pagy Employee.latest_employee
+        @employees = Employee.all
         render json: {
           data: ActiveModelSerializers::SerializableResource.new(@employees, each_serializer: EmployeeSerializer),
           message: ["employee list fetched successfully"],
           status: 200,
           type: "Success",
-          page: @pagy
         }
       end
 
       def show
-        render json: {
-          data: ActiveModelSerializers::SerializableResource.new(@employee, serializer: EmployeeSerializer),
-          message: ["employee profile fetched successfully"],
-          status: 200,
-          type: "Success"
-        }
+        render json: @current_employee.as_json(
+          except: :id,
+          include: { branch: { except: %i[id] } }
+        ), status: :ok
       end
 
       def update

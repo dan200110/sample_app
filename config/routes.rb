@@ -16,6 +16,12 @@ Rails.application.routes.draw do
       post "/login", to: "auth#create"
       resources :microposts
       resources :employees
+      resources :categories
+      resources :suppliers
+      resources :batch_inventories
+      resources :inventories
+      resources :import_inventories
+      resources :orders
     end
   end
 

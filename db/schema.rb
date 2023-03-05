@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_04_085511) do
+ActiveRecord::Schema.define(version: 2023_03_05_102516) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -40,10 +40,23 @@ ActiveRecord::Schema.define(version: 2023_03_04_085511) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "branchs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "batch_inventories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "batch_code"
+    t.date "expired_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "branches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "branch_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -55,6 +68,56 @@ ActiveRecord::Schema.define(version: 2023_03_04_085511) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "remember_digest"
+    t.bigint "branch_id"
+    t.index ["branch_id"], name: "index_employees_on_branch_id"
+  end
+
+  create_table "import_inventories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.float "price"
+    t.integer "inventory_type"
+    t.integer "quantity"
+    t.bigint "category_id"
+    t.bigint "batch_inventory_id"
+    t.date "date"
+    t.bigint "inventory_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["batch_inventory_id"], name: "index_import_inventories_on_batch_inventory_id"
+    t.index ["category_id"], name: "index_import_inventories_on_category_id"
+    t.index ["inventory_id"], name: "index_import_inventories_on_inventory_id"
+  end
+
+  create_table "inventories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.float "price"
+    t.integer "inventory_type"
+    t.integer "quantity"
+    t.bigint "category_id"
+    t.bigint "batch_inventory_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["batch_inventory_id"], name: "index_inventories_on_batch_inventory_id"
+    t.index ["category_id"], name: "index_inventories_on_category_id"
+  end
+
+  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "total_price"
+    t.integer "total_quantity"
+    t.integer "status"
+    t.bigint "inventory_id"
+    t.bigint "branch_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_orders_on_branch_id"
+    t.index ["inventory_id"], name: "index_orders_on_inventory_id"
+  end
+
+  create_table "suppliers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "contact"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

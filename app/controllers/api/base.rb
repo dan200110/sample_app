@@ -19,6 +19,7 @@ module Api
       token = request.headers['Authorization'].split(' ').last if request.headers['Authorization'].present?
       employee_id = JsonWebToken.decode(token)["employee_id"] if token
       @current_employee = Employee.find_by id: employee_id
+      @curren_branch = @current_employee&.branch
       return if @current_employee
 
       render json: {

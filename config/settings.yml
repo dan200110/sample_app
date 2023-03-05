@@ -1,4 +1,4 @@
-user:
+employee:
   VALID_EMAIL_REGEX: !ruby/regexp /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   email:
     email_min_length: 6

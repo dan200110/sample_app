@@ -1,3 +1,3 @@
 class MicropostSerializer < ActiveModel::Serializer
-  attributes :id, :content, :user_id
+  attributes :id, :content, :employee_id
 end

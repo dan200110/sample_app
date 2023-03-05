@@ -2,17 +2,18 @@ module Api
   module V1
     class AuthController < Base
       def create
-        user = User.find_by email: params[:email]
-        if user&.authenticate params[:password]
-          generate_token user
+        employee = Employee.find_by email: params[:email]
+        if employee&.authenticate params[:password]
+          generate_token employee
           render json: {message: "Login successfully", success: true, data: @data}, status: :ok
         else
           render json: {message: "Invalid email or password combination", success: false}, status: :unauthorized
         end
       end
 
-      def generate_token user
-        access_token = JsonWebToken.encode(user_id: user.id)
+      def generate_token employee
+
+        access_token = JsonWebToken.encode(employee_id: employee.id)
         @data = {
           access_token: access_token,
           token_type: "Bearer"

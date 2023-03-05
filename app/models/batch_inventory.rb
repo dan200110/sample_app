@@ -1,0 +1,2 @@
+class BatchInventory < ApplicationRecord
+end

@@ -2,18 +2,25 @@ module Api
   class Base < ActionController::API
     include Pagy::Backend
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
+    rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_response
     protected
 
     def render_unprocessable_entity_response error, status: :unprocessable_entity
       render json: Errors::ActiveRecordValidation.new(error.record).to_hash, status: status
     end
 
-    def authenticate_user!
-      token = request.headers["Jwt-Token"]
-      user_id = JsonWebToken.decode(token)["user_id"] if token
-      @current_user = User.find_by id: user_id
-      return if @current_user
+    def render_record_not_found_response error, status: :not_found
+
+      render json: Errors::ActiveRecordNotFound.new(
+        error).to_hash, status: status
+    end
+
+    def authenticate_employee!
+      token = request.headers['Authorization'].split(' ').last if request.headers['Authorization'].present?
+      employee_id = JsonWebToken.decode(token)["employee_id"] if token
+      @current_employee = Employee.find_by id: employee_id
+      @curren_branch = @current_employee&.branch
+      return if @current_employee
 
       render json: {
         message: ["You need to log in to use the app"],

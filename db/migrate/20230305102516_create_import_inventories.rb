@@ -9,6 +9,9 @@ class CreateImportInventories < ActiveRecord::Migration[6.1]
       t.references :batch_inventory
       t.date :date
       t.references :inventory
+      t.references :supplier
+      t.references :branch
+
       t.timestamps
     end
   end

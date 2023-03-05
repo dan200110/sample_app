@@ -7,6 +7,8 @@ class CreateInventories < ActiveRecord::Migration[6.1]
       t.integer :quantity
       t.references :category
       t.references :batch_inventory
+      t.references :supplier
+      t.references :branch
 
       t.timestamps
     end

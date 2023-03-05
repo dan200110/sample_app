@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     scope module: "v1", path: "v1" do
       post "/login", to: "auth#create"
       resources :microposts
+      resources :branches
       resources :employees
       resources :categories
       resources :suppliers

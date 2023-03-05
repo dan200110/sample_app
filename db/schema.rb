@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "remember_digest"
     t.bigint "branch_id"
     t.index ["branch_id"], name: "index_employees_on_branch_id"
   end
@@ -81,11 +80,15 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.bigint "batch_inventory_id"
     t.date "date"
     t.bigint "inventory_id"
+    t.bigint "supplier_id"
+    t.bigint "branch_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["batch_inventory_id"], name: "index_import_inventories_on_batch_inventory_id"
+    t.index ["branch_id"], name: "index_import_inventories_on_branch_id"
     t.index ["category_id"], name: "index_import_inventories_on_category_id"
     t.index ["inventory_id"], name: "index_import_inventories_on_inventory_id"
+    t.index ["supplier_id"], name: "index_import_inventories_on_supplier_id"
   end
 
   create_table "inventories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -95,10 +98,14 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.integer "quantity"
     t.bigint "category_id"
     t.bigint "batch_inventory_id"
+    t.bigint "supplier_id"
+    t.bigint "branch_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["batch_inventory_id"], name: "index_inventories_on_batch_inventory_id"
+    t.index ["branch_id"], name: "index_inventories_on_branch_id"
     t.index ["category_id"], name: "index_inventories_on_category_id"
+    t.index ["supplier_id"], name: "index_inventories_on_supplier_id"
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -1,6 +1,6 @@
 module Api
   module V1
-    class BranchsController < Base
+    class BranchesController < Base
       def create
         @branch = Branch.new branch_params
         if @branch.save!

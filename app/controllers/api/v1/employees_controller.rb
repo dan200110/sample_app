@@ -71,13 +71,8 @@ module Api
 
       def find_employee
         @employee = Employee.find_by! id: params[:id]
-        return if @employee
-
-        render json: {
-          message: ["Not found employee"],
-          status: 400,
-          type: "Fail"
-        }, status: :bad_request
+      rescue StandardError => e
+        render json: { errors: e.message }, status: :bad_request
       end
 
       def correct_employee

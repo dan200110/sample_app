@@ -3,22 +3,18 @@ module Api
     class BranchesController < Base
       def create
         @branch = Branch.new branch_params
-        if @branch.save!
-          render json: {
-            data: ActiveModelSerializers::SerializableResource.new(@branch, serializer: BranchSerializer),
-            message: ["Branch create fetched successfully"],
-            status: 200,
-            type: "Success"
-          }
-        else
-          render json: @branch, status: :created, location: @branch
+        if
+          @branch.save!
+          render json: @branch.as_json, status: :ok
         end
+      rescue StandardError => e
+        render json: { error: e.message }, status: :bad_request
       end
 
       private
 
       def branch_params
-        params.permit(:name, :address, :branch_code)
+        params.permit(:name, :address, :branch_code, :email)
       end
     end
   end

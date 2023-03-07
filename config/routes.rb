@@ -20,7 +20,9 @@ Rails.application.routes.draw do
       resources :categories
       resources :suppliers
       resources :batch_inventories
-      resources :inventories
+      resources :inventories do
+        get :get_expired, on: :collection
+      end
       resources :import_inventories
       resources :orders
     end

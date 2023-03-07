@@ -4,6 +4,7 @@ class CreateBranches < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :address
       t.string :branch_code
+      t.string :email
       t.timestamps
     end
   end

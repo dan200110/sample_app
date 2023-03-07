@@ -3,6 +3,7 @@ class CreateSuppliers < ActiveRecord::Migration[6.1]
     create_table :suppliers do |t|
       t.string :name
       t.string :contact
+      t.string :email
       t.timestamps
     end
   end

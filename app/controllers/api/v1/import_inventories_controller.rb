@@ -36,19 +36,16 @@ module Api
 
       def update_inventory
         inventory = Inventory.find_by(id: import_inventory_params["inventory_id"])
+        update_data = update_inventory_params
+        update_data["quantity"] = update_data["quantity"].to_i + inventory.quantity
 
-        inventory.update!(update_inventory_params)
+        inventory.update!(update_data)
       end
 
       def find_import_inventory
         @import_inventory = ImportInventory.find_by! id: params[:id]
-        return if @import_inventory
-
-        render json: {
-          message: ["Not found import_inventory"],
-          status: 400,
-          type: "Fail"
-        }, status: :bad_request
+      rescue StandardError => e
+        render json: { errors: e.message }, status: :bad_request
       end
     end
   end

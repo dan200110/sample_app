@@ -5,7 +5,7 @@ module Api
         employee = Employee.find_by email: params[:email]
         if employee&.authenticate params[:password]
           generate_token employee
-          render json: {message: "Login successfully", success: true, data: @data}, status: :ok
+          render json: {message: "Login successfully", success: true, data: @data, employee: employee}, status: :ok
         else
           render json: {message: "Invalid email or password combination", success: false}, status: :unauthorized
         end

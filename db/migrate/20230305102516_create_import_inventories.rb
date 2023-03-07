@@ -3,11 +3,10 @@ class CreateImportInventories < ActiveRecord::Migration[6.1]
     create_table :import_inventories do |t|
       t.string :name
       t.float :price
-      t.integer :inventory_type
       t.integer :quantity
-      t.references :category
       t.references :batch_inventory
       t.date :date
+      t.string :import_inventory_code
       t.references :inventory
       t.references :supplier
       t.references :branch

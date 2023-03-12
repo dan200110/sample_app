@@ -27,11 +27,11 @@ module Api
       private
 
       def import_inventory_params
-        params.permit(:name, :price, :inventory_type, :quantity, :date, :category_id, :batch_inventory_id, :inventory_id, :branch_id, :supplier_id)
+        params.permit(:name, :price, :quantity, :date, :batch_inventory_id, :inventory_id, :branch_id, :supplier_id)
       end
 
       def update_inventory_params
-        params.permit(:name, :price, :quantity, :category_id, :batch_inventory_id, :branch_id, :supplier_id)
+        params.permit(:name, :price, :quantity, :batch_inventory_id, :supplier_id)
       end
 
       def update_inventory

@@ -1,6 +1,8 @@
 module Api
   module V1
     class BranchesController < Base
+      before_action :find_branch, except: %i(create index)
+
       def index
         @branches = Branch.all
 
@@ -17,10 +19,31 @@ module Api
         render json: { error: e.message }, status: :bad_request
       end
 
+      def update
+        if @branch.update(branch_params)
+          render json: @branch.as_json, status: :ok
+        else
+          render json: { error: @branch.errors }, status: :bad_request
+        end
+      end
+
+      def destroy
+        @branch.destroy!
+        head :ok
+      rescue StandardError => e
+        render json: { errors: e.message }, status: :bad_request
+      end
+
       private
 
       def branch_params
-        params.permit(:name, :address, :branch_code, :email)
+        params.permit(:name, :address, :branch_code, :email, :contact)
+      end
+
+      def find_branch
+        @branch = Branch.find_by! id: params[:id]
+      rescue StandardError => e
+        render json: { errors: e.message }, status: :bad_request
       end
     end
   end

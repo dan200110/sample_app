@@ -31,7 +31,8 @@ module Api
       end
 
       def get_expired
-        batch_expired = BatchInventory.get_expired.pluck :id
+        day_left = params[:day_left].present? ? params[:day_left].to_i : 0
+        batch_expired = BatchInventory.get_expired(day_left).pluck :id
 
         @expired_inventories = Inventory.where(batch_inventory_id: batch_expired, branch_id: @current_branch.id)
         render json: @expired_inventories.map {|inventory|

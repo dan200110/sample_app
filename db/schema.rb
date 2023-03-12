@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.string "address"
     t.string "branch_code"
     t.string "email"
+    t.string "contact"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -76,9 +77,10 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.string "name"
     t.float "price"
     t.integer "quantity"
-    t.bigint "batch_inventory_id"
+    t.integer "status"
     t.date "date"
     t.string "import_inventory_code"
+    t.bigint "batch_inventory_id"
     t.bigint "inventory_id"
     t.bigint "supplier_id"
     t.bigint "branch_id"
@@ -128,6 +130,7 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.string "name"
     t.string "contact"
     t.string "email"
+    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

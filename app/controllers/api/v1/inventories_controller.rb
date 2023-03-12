@@ -8,9 +8,9 @@ module Api
         @inventories = @current_branch.inventory.search_by_name(params["search_name"])
         render json: @inventories.map {|inventory|
           if inventory.image.attached?
-            inventory.as_json.merge({image: url_for(inventory.image)})
+            inventory.as_json(except: %i[category_id batch_inventory_id supplier_id branch_id]).merge({image: url_for(inventory.image)})
           else
-            inventory.as_json
+            inventory.as_json(except: %i[category_id batch_inventory_id supplier_id branch_id])
           end
         }, status: :ok
       end
@@ -24,21 +24,21 @@ module Api
 
       def show
         if @inventory.image.attached?
-          render json: @inventory.as_json.merge({image: url_for(@inventory.image)}), status: :ok
+          render json: @inventory.as_json(except: %i[category_id batch_inventory_id supplier_id branch_id]).merge({image: url_for(@inventory.image)}), status: :ok
         else
-          render json: @inventory.as_json, status: :ok
+          render json: @inventory.as_json(except: %i[category_id batch_inventory_id supplier_id branch_id]), status: :ok
         end
       end
 
       def get_expired
         batch_expired = BatchInventory.get_expired.pluck :id
 
-        @expired_inventories = Inventory.where(batch_inventory_id: batch_expired)
+        @expired_inventories = Inventory.where(batch_inventory_id: batch_expired, branch_id: @current_branch.id)
         render json: @expired_inventories.map {|inventory|
           if inventory.image.attached?
-            inventory.as_json.merge({image: url_for(inventory.image)})
+            inventory.as_json(except: %i[category_id batch_inventory_id supplier_id branch_id]).merge({image: url_for(inventory.image)})
           else
-            inventory.as_json
+            inventory.as_json(except: %i[category_id batch_inventory_id supplier_id branch_id])
           end
         }, status: :ok
       end
@@ -62,7 +62,7 @@ module Api
 
       def inventory_params
         params.permit(:name, :price, :inventory_type, :quantity, :category_id, :batch_inventory_id, :branch_id,
-                      :supplier_id, :image)
+                      :supplier_id, :image, :inventory_code, :main_ingredient, :producer)
       end
 
       def find_inventory

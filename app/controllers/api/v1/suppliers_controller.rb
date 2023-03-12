@@ -42,7 +42,7 @@ module Api
       private
 
       def supplier_params
-        params.permit(:name, :contact)
+        params.permit(:name, :contact, :email, :address)
       end
 
       def find_supplier

@@ -19,7 +19,9 @@ Rails.application.routes.draw do
       resources :employees
       resources :categories
       resources :suppliers
-      resources :batch_inventories
+      resources :batch_inventories do
+        get :get_all_expired, on: :collection
+      end
       resources :inventories do
         get :get_expired, on: :collection
       end

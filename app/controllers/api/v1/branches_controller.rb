@@ -1,6 +1,12 @@
 module Api
   module V1
     class BranchesController < Base
+      def index
+        @branches = Branch.all
+
+        render json: @branches.as_json, status: :ok
+      end
+
       def create
         @branch = Branch.new branch_params
         if

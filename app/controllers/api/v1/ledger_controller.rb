@@ -4,13 +4,23 @@ module Api
       before_action :authenticate_employee!
 
       def index
-        @orders = @current_branch.order.pluck(:id, :created_at, :total_price)
+        @orders = @current_branch.order
         @import_inventories = @current_branch.import_inventory
 
-        render json: {
-          orders: @orders.as_json,
-          import_inventories: @import_inventories.as_json
-        }, status: :ok
+        arr_order = @orders.map {|order|
+          order.as_json(only: %i[created_at]).merge(
+            {revenue: order.total_price * order.total_quantity, code: order&.order_code, type: "order"}
+          )
+        }
+
+        arr_import_inventory = @import_inventories.map {|import_inventory|
+          import_inventory.as_json(only: %i[created_at]).merge(
+            {revenue: import_inventory.price * import_inventory.quantity, code: import_inventory&.import_inventory_code, type: "import_inventory"}
+          )
+        }
+
+        arr_result = arr_order + arr_import_inventory
+        render json: arr_result, status: :ok
       end
     end
   end

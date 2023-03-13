@@ -5,17 +5,31 @@ module Api
       before_action :find_import_inventory, except: %i(create index)
 
       def index
-        @import_inventories = ImportInventory.all
+        @import_inventories = @current_branch.import_inventory
 
-        render json: @import_inventories.as_json, status: :ok
+        render json: @import_inventories.as_json(
+          include: {
+            inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
+            supplier: { except: %i[created_at updated_at] },
+            batch_inventory: { except: %i[created_at updated_at] },
+            branch: { except: %i[created_at updated_at] }
+          }
+        ), status: :ok
       end
 
       def show
-        render json: @import_inventory.as_json, status: :ok
+        render json: @import_inventory.as_json(
+          include: {
+            inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
+            supplier: { except: %i[created_at updated_at] },
+            batch_inventory: { except: %i[created_at updated_at] },
+            branch: { except: %i[created_at updated_at] }
+          }
+        ), status: :ok
       end
 
       def create
-        @import_inventory = ImportInventory.new import_inventory_params.merge(import_inventory_code: generate_import_inventory_code)
+        @import_inventory = ImportInventory.new import_inventory_params.merge(import_inventory_code: generate_import_inventory_code, branch_id: @current_branch.id)
         if @import_inventory.save!
           update_inventory
           render json: @import_inventory.as_json, status: :ok
@@ -27,7 +41,7 @@ module Api
       private
 
       def import_inventory_params
-        params.permit(:name, :price, :quantity, :batch_inventory_id, :inventory_id, :branch_id, :supplier_id, :import_inventory_code, :status)
+        params.permit(:price, :quantity, :batch_inventory_id, :inventory_id, :supplier_id, :import_inventory_code, :status)
       end
 
       def update_inventory_params

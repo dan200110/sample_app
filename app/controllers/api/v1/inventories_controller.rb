@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @inventory = Inventory.new inventory_params.merge(inventory_code: generate_inventory_code)
+        @inventory = Inventory.new inventory_params
         render json: @inventory.as_json, status: :ok if @inventory.save!
       rescue StandardError => e
         render json: {error: e.message}, status: :bad_request
@@ -76,7 +76,7 @@ module Api
 
       def inventory_params
         params.permit(:name, :price, :inventory_type, :quantity, :category_id, :batch_inventory_id, :branch_id,
-                      :supplier_id, :image, :main_ingredient, :producer)
+                      :supplier_id, :image, :main_ingredient, :producer, :inventory_code)
       end
 
       def find_inventory

@@ -28,8 +28,11 @@ Rails.application.routes.draw do
       end
       resources :statistic do
         get :get_total_order_price, on: :collection
+        get :get_order_by_day, on: :collection
+        get :get_revenue_order, on: :collection
         get :get_total_import_inventory_price, on: :collection
       end
+      resources :ledger
       resources :import_inventories
       resources :orders
     end

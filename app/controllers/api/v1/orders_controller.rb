@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        @order = Order.new order_params
+        @order = Order.new order_params.merge(order_code: generate_order_code)
         if @order.save!
           reduce_inventory_quantity
           render json: @order.as_json, status: :ok
@@ -37,7 +37,7 @@ module Api
       end
 
       def check_quantity
-        @inventory = Inventory.find_by! id: params[:branch_id]
+        @inventory = Inventory.find_by! id: params[:inventory_id]
         if @inventory.quantity < params[:total_quantity].to_i
           render json: {error: "order quantity large than inventory quantity"}, status: :bad_request
           return
@@ -48,6 +48,10 @@ module Api
         @inventory = @order.inventory
         ivnentory_quantity = @inventory.quantity - @order.total_quantity
         @inventory.update_attribute :quantity, ivnentory_quantity
+      end
+
+      def generate_order_code
+        "ORDER_CODE" + Time.now.strftime('%Y%m%d%H%M%S')
       end
     end
   end

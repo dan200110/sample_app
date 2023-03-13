@@ -77,8 +77,7 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.string "name"
     t.float "price"
     t.integer "quantity"
-    t.integer "status"
-    t.date "date"
+    t.integer "status", default: 0
     t.string "import_inventory_code"
     t.bigint "batch_inventory_id"
     t.bigint "inventory_id"
@@ -115,9 +114,8 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "total_price"
     t.integer "total_quantity"
-    t.integer "status"
+    t.integer "status", default: 0
     t.string "order_code"
-    t.date "date"
     t.bigint "inventory_id"
     t.bigint "branch_id"
     t.datetime "created_at", precision: 6, null: false

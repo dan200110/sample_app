@@ -15,7 +15,7 @@ module Api
       end
 
       def create
-        @import_inventory = ImportInventory.new import_inventory_params
+        @import_inventory = ImportInventory.new import_inventory_params.merge(import_inventory_code: generate_import_inventory_code)
         if @import_inventory.save!
           update_inventory
           render json: @import_inventory.as_json, status: :ok
@@ -27,7 +27,7 @@ module Api
       private
 
       def import_inventory_params
-        params.permit(:name, :price, :quantity, :date, :batch_inventory_id, :inventory_id, :branch_id, :supplier_id)
+        params.permit(:name, :price, :quantity, :batch_inventory_id, :inventory_id, :branch_id, :supplier_id, :import_inventory_code, :status)
       end
 
       def update_inventory_params
@@ -46,6 +46,10 @@ module Api
         @import_inventory = ImportInventory.find_by! id: params[:id]
       rescue StandardError => e
         render json: { errors: e.message }, status: :bad_request
+      end
+
+      def generate_import_inventory_code
+        "IMPORT_CODE" + Time.now.strftime('%Y%m%d%H%M%S')
       end
     end
   end

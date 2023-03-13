@@ -12,6 +12,7 @@ class Inventory < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
 
   scope :search_by_name, lambda { |search| where("name LIKE ? OR inventory_code LIKE ?", "%#{search}%", "%#{search}%") if search.present? }
+  scope :get_out_of_stock, lambda { |quantity| where(quantity: ..quantity) }
 
   def image_url
     Rails.application.routes.url_helpers.url_for(image) if image.attached?

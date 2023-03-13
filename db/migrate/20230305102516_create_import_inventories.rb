@@ -4,8 +4,7 @@ class CreateImportInventories < ActiveRecord::Migration[6.1]
       t.string :name
       t.float :price
       t.integer :quantity
-      t.integer :status
-      t.date :date
+      t.integer :status, default: 0
       t.string :import_inventory_code
       t.references :batch_inventory
       t.references :inventory

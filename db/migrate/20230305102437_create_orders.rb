@@ -3,9 +3,8 @@ class CreateOrders < ActiveRecord::Migration[6.1]
     create_table :orders do |t|
       t.integer :total_price
       t.integer :total_quantity
-      t.integer :status
+      t.integer :status, default: 0
       t.string :order_code
-      t.date :date
       t.references :inventory
       t.references :branch
       t.timestamps

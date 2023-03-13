@@ -24,6 +24,11 @@ Rails.application.routes.draw do
       end
       resources :inventories do
         get :get_expired, on: :collection
+        get :get_out_of_stock, on: :collection
+      end
+      resources :statistic do
+        get :get_total_order_price, on: :collection
+        get :get_total_import_inventory_price, on: :collection
       end
       resources :import_inventories
       resources :orders

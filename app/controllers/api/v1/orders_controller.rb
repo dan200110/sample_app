@@ -19,7 +19,12 @@ module Api
         @order = Order.new order_params.merge(order_code: generate_order_code, branch_id: @current_branch.id)
         if @order.save!
           reduce_inventory_quantity
-          render json: @order.as_json, status: :ok
+          render json: @order.as_json(
+            include: {
+              inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
+              branch: { except: %i[created_at updated_at] }
+            }
+          ), status: :ok
         end
       rescue StandardError => e
         render json: {error: e.message}, status: :bad_request

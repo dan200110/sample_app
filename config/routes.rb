@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'controllername/new'
+  get 'controllername/create'
   scope "(:locale)", locale: /en|vi/ do
     resources :account_activations, only: :edit
     resources :password_resets, only: %i(new create edit update)
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
       resources :inventories do
         get :get_expired, on: :collection
         get :get_out_of_stock, on: :collection
+        get :send_request_mail_to_supplier, on: :collection
       end
       resources :statistic do
         get :get_total_order_price, on: :collection

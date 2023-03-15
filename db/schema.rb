@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
   end
 
   create_table "import_inventories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
     t.float "price"
     t.integer "quantity"
     t.integer "status", default: 0

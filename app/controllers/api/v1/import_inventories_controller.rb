@@ -32,7 +32,14 @@ module Api
         @import_inventory = ImportInventory.new import_inventory_params.merge(import_inventory_code: generate_import_inventory_code, branch_id: @current_branch.id)
         if @import_inventory.save!
           update_inventory
-          render json: @import_inventory.as_json, status: :ok
+          render json: @import_inventory.as_json(
+            include: {
+              inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
+              supplier: { except: %i[created_at updated_at] },
+              batch_inventory: { except: %i[created_at updated_at] },
+              branch: { except: %i[created_at updated_at] }
+            }
+          ),, status: :ok
         end
       rescue StandardError => e
         render json: { error: e.message }, status: :bad_request

@@ -26,4 +26,8 @@ class Inventory < ApplicationRecord
       j.merge!(supplier: supplier.as_json(except: %i[created_at updated_at]))
     end
   end
+
+  def send_request_email_to_supplier
+    InventoryMailer.send_request_mail_to_supplier(self).deliver_now
+  end
 end

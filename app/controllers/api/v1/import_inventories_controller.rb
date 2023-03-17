@@ -39,7 +39,7 @@ module Api
               batch_inventory: { except: %i[created_at updated_at] },
               branch: { except: %i[created_at updated_at] }
             }
-          ),, status: :ok
+          ), status: :ok
         end
       rescue StandardError => e
         render json: { error: e.message }, status: :bad_request

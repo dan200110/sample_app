@@ -3,8 +3,8 @@ class CreateInventories < ActiveRecord::Migration[6.1]
     create_table :inventories do |t|
       t.string :name
       t.float :price
-      t.integer :inventory_type
-      t.integer :quantity
+      t.integer :inventory_type, default: 0
+      t.integer :quantity, default: 0
       t.string :inventory_code
       t.string :main_ingredient
       t.string :producer

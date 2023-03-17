@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
   create_table "inventories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.float "price"
-    t.integer "inventory_type"
-    t.integer "quantity"
+    t.integer "inventory_type", default: 0
+    t.integer "quantity", default: 0
     t.string "inventory_code"
     t.string "main_ingredient"
     t.string "producer"

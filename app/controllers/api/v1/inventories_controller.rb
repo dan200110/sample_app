@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @inventory = Inventory.new inventory_params
+        @inventory = Inventory.new inventory_params.merge(branch_id: @current_branch.id)
         render json: @inventory.as_json, status: :ok if @inventory.save!
       rescue StandardError => e
         render json: {error: e.message}, status: :bad_request
@@ -79,14 +79,13 @@ module Api
         @list_inventories_mail.each do |inventory|
           inventory.send_request_email_to_supplier
         end
-        
         render json: "send mail success", status: :ok
       end
 
       private
 
       def inventory_params
-        params.permit(:name, :price, :inventory_type, :quantity, :category_id, :batch_inventory_id, :branch_id,
+        params.permit(:name, :price, :inventory_type, :quantity, :category_id, :batch_inventory_id,
                       :supplier_id, :image, :main_ingredient, :producer, :inventory_code)
       end
 

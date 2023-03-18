@@ -10,19 +10,21 @@ module Api
         render json: @orders.as_json(
           include: {
             inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
-            branch: { except: %i[created_at updated_at] }
+            branch: { except: %i[created_at updated_at] },
+            employee: { except: %i[created_at updated_at] }
           }
         ), status: :ok
       end
 
       def create
-        @order = Order.new order_params.merge(order_code: generate_order_code, branch_id: @current_branch.id)
+        @order = Order.new order_params.merge(order_code: generate_order_code, branch_id: @current_branch.id, employee_id: @current_employee.id)
         if @order.save!
           reduce_inventory_quantity
           render json: @order.as_json(
             include: {
               inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
-              branch: { except: %i[created_at updated_at] }
+              branch: { except: %i[created_at updated_at] },
+              employee: { except: %i[created_at updated_at] }
             }
           ), status: :ok
         end
@@ -34,7 +36,8 @@ module Api
         render json: @order.as_json(
           include: {
             inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
-            branch: { except: %i[created_at updated_at] }
+            branch: { except: %i[created_at updated_at] },
+            employee: { except: %i[created_at updated_at] }
           }
         ), status: :ok
       end
@@ -42,7 +45,7 @@ module Api
       private
 
       def order_params
-        params.permit(:total_price, :total_quantity, :status, :inventory_id)
+        params.permit(:total_price, :total_quantity, :status, :inventory_id, :customer_name)
       end
 
       def find_order

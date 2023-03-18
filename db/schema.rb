@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_05_102516) do
+ActiveRecord::Schema.define(version: 2023_03_17_142546) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "batch_inventories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -82,10 +90,12 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.bigint "inventory_id"
     t.bigint "supplier_id"
     t.bigint "branch_id"
+    t.bigint "employee_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["batch_inventory_id"], name: "index_import_inventories_on_batch_inventory_id"
     t.index ["branch_id"], name: "index_import_inventories_on_branch_id"
+    t.index ["employee_id"], name: "index_import_inventories_on_employee_id"
     t.index ["inventory_id"], name: "index_import_inventories_on_inventory_id"
     t.index ["supplier_id"], name: "index_import_inventories_on_supplier_id"
   end
@@ -115,11 +125,14 @@ ActiveRecord::Schema.define(version: 2023_03_05_102516) do
     t.integer "total_quantity"
     t.integer "status", default: 0
     t.string "order_code"
+    t.string "customer_name"
+    t.bigint "employee_id"
     t.bigint "inventory_id"
     t.bigint "branch_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["branch_id"], name: "index_orders_on_branch_id"
+    t.index ["employee_id"], name: "index_orders_on_employee_id"
     t.index ["inventory_id"], name: "index_orders_on_inventory_id"
   end
 

@@ -9,7 +9,7 @@ class CreateImportInventories < ActiveRecord::Migration[6.1]
       t.references :inventory
       t.references :supplier
       t.references :branch
-
+      t.references :employee
       t.timestamps
     end
   end

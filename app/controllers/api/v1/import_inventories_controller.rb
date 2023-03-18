@@ -12,7 +12,8 @@ module Api
             inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
             supplier: { except: %i[created_at updated_at] },
             batch_inventory: { except: %i[created_at updated_at] },
-            branch: { except: %i[created_at updated_at] }
+            branch: { except: %i[created_at updated_at] },
+            employee: { except: %i[created_at updated_at] }
           }
         ), status: :ok
       end
@@ -23,13 +24,14 @@ module Api
             inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
             supplier: { except: %i[created_at updated_at] },
             batch_inventory: { except: %i[created_at updated_at] },
-            branch: { except: %i[created_at updated_at] }
+            branch: { except: %i[created_at updated_at] },
+            employee: { except: %i[created_at updated_at] }
           }
         ), status: :ok
       end
 
       def create
-        @import_inventory = ImportInventory.new import_inventory_params.merge(import_inventory_code: generate_import_inventory_code, branch_id: @current_branch.id)
+        @import_inventory = ImportInventory.new import_inventory_params.merge(import_inventory_code: generate_import_inventory_code, branch_id: @current_branch.id, employee_id: @current_employee.id)
         if @import_inventory.save!
           update_inventory
           render json: @import_inventory.as_json(
@@ -37,7 +39,8 @@ module Api
               inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
               supplier: { except: %i[created_at updated_at] },
               batch_inventory: { except: %i[created_at updated_at] },
-              branch: { except: %i[created_at updated_at] }
+              branch: { except: %i[created_at updated_at] },
+              employee: { except: %i[created_at updated_at] }
             }
           ), status: :ok
         end

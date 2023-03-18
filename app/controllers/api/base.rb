@@ -28,5 +28,18 @@ module Api
         type: "failure"
       }, status: :unauthorized
     end
+
+    def authenticate_admin!
+      token = request.headers['Authorization'].split(' ').last if request.headers['Authorization'].present?
+      admin_id = JsonWebToken.decode(token)["admin_id"] if token
+      @current_admin = Admin.find_by id: admin_id
+      return if @current_admin
+
+      render json: {
+        message: ["You need to log in to use the app"],
+        status: 401,
+        type: "failure"
+      }, status: :unauthorized
+    end
   end
 end

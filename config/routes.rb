@@ -49,6 +49,19 @@ Rails.application.routes.draw do
         resources :employees
         resources :categories
         resources :suppliers
+        resources :inventories do
+          get :get_expired, on: :collection
+          get :get_out_of_stock, on: :collection
+          get :send_request_mail_to_supplier, on: :collection
+        end
+        resources :statistic
+        resources :ledger
+        resources :import_inventories
+        resources :orders
+        resources :export_csv do
+          get :export_employee, on: :collection
+          get :export_inventory, on: :collection
+        end
       end
     end
   end

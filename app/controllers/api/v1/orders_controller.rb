@@ -69,7 +69,7 @@ module Api
       end
 
       def generate_order_code
-        "ORDER_CODE" + Time.now.strftime('%Y%m%d%H%M%S')
+        "ORDER_CODE_" + Time.now.strftime('%Y%m%d%H%M%S')
       end
     end
   end

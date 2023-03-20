@@ -73,7 +73,7 @@ module Api
       end
 
       def generate_import_inventory_code
-        "IMPORT_CODE" + Time.now.strftime('%Y%m%d%H%M%S')
+        "IMPORT_CODE_" + Time.now.strftime('%Y%m%d%H%M%S')
       end
     end
   end

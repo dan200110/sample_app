@@ -2,6 +2,8 @@ class Order < ApplicationRecord
   belongs_to :branch
   belongs_to :inventory
   belongs_to :employee, optional: true
+
+  scope :search_by_branch, lambda { |branch_id| where(branch_id: branch_id) if branch_id.present? }
   scope :time_between, lambda { |start_time, end_time|
     where(created_at: start_time..end_time)
   }

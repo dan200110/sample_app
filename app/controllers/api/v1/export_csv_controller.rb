@@ -18,7 +18,7 @@ module Api
       end
 
       def export_inventory
-        @inventories = Inventory.all
+        @inventories = Inventory.search_by_branch(params["branch_id"])
         header = ["Name", "inventory code", "quantity", "price", "inventory_type", "main_ingredient", "producer", "category", "batch inventory", "supplier", "branch"]
 
         result = CSV.generate do |csv|

@@ -54,13 +54,20 @@ Rails.application.routes.draw do
           get :get_out_of_stock, on: :collection
           get :send_request_mail_to_supplier, on: :collection
         end
-        resources :statistic
+        resources :statistic do
+          get :get_total_order_price, on: :collection
+          get :get_order_by_day, on: :collection
+          get :get_revenue_order, on: :collection
+          get :get_total_import_inventory_price, on: :collection
+          get :get_order_by_branch, on: :collection
+        end
         resources :ledger
         resources :import_inventories
         resources :orders
         resources :export_csv do
           get :export_employee, on: :collection
           get :export_inventory, on: :collection
+          get :export_order, on: :collection
         end
       end
     end

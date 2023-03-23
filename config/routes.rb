@@ -41,6 +41,8 @@ Rails.application.routes.draw do
       resources :export_csv do
         get :export_employee, on: :collection
         get :export_inventory, on: :collection
+        get :export_order, on: :collection
+        get :export_import_inventory, on: :collection
       end
       scope module: "ad", path: "ad" do
         post "/login", to: "auth#create"
@@ -68,6 +70,7 @@ Rails.application.routes.draw do
           get :export_employee, on: :collection
           get :export_inventory, on: :collection
           get :export_order, on: :collection
+          get :export_import_inventory, on: :collection
         end
       end
     end

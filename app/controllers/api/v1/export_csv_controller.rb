@@ -31,6 +31,36 @@ module Api
 
         send_data(result, filename: "inventories.csv", type: "text/csv", disposition: 'attachment')
       end
+
+      def export_order
+        @orders = Order.search_by_branch(params["branch_id"])
+        header = ["Order Code", "inventory code", "Inventory name", "price", "quantity", "customer name", "employee name", "branch"]
+
+        result = CSV.generate do |csv|
+          csv << header
+          @orders.each do |order|
+            csv << [order.order_code, order&.inventory&.inventory_code, order&.inventory&.name, order.total_price, order.total_quantity,
+                      order.customer_name, order&.employee&.name, order&.branch&.name]
+          end
+        end
+
+        send_data(result, filename: "orders.csv", type: "text/csv", disposition: 'attachment')
+      end
+
+      def export_import_inventory
+        @import_inventories = ImportInventory.search_by_branch(params["branch_id"])
+        header = ["Import Inventory Code", "inventory code", "Inventory name", "price", "quantity", "batch inventory code", "batch inventory expired at", "supplier name", "employee name", "branch"]
+
+        result = CSV.generate do |csv|
+          csv << header
+          @import_inventories.each do |im|
+            csv << [im.import_inventory_code, im&.inventory&.inventory_code, im&.inventory&.name, im.price, im.quantity,
+                      im&.batch_inventory&.batch_code, im&.batch_inventory&.expired_date, im&.supplier&.name, im&.employee&.name, im&.branch&.name]
+          end
+        end
+
+        send_data(result, filename: "orders.csv", type: "text/csv", disposition: 'attachment')
+      end
     end
   end
 end

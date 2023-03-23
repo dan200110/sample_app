@@ -15,6 +15,13 @@ class Inventory < ApplicationRecord
   scope :search_by_branch, lambda { |branch_id| where(branch_id: branch_id) if branch_id.present? }
   scope :get_out_of_stock, lambda { |quantity| where(quantity: ..quantity) }
 
+  scope :most_ordered, (lambda do
+    joins(:order).order("sum_total_quantity DESC").group(:id).sum(:total_quantity)
+  end)
+
+  scope :sort_price, ->(type){order price: type if type.present?}
+  scope :sort_created_time, ->(type){order created_at: type if type.present?}
+
   def image_url
     Rails.application.routes.url_helpers.url_for(image) if image.attached?
   end

@@ -59,7 +59,7 @@ module Api
           end
         end
 
-        send_data(result, filename: "orders.csv", type: "text/csv", disposition: 'attachment')
+        send_data(result, filename: "import_inventories.csv", type: "text/csv", disposition: 'attachment')
       end
     end
   end

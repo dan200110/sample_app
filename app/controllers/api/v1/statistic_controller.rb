@@ -32,7 +32,19 @@ module Api
         else
           @revenue = @current_branch.order.revenue_day_chart
         end
-        render json: @revenue , status: :ok
+        # render json: @revenue , status: :ok
+        res = {
+          "2023-01-23": 100,
+          "2023-01-24": 500,
+          "2023-01-25": 125,
+          "2023-01-26": 250,
+          "2023-01-27": 158,
+          "2023-01-28": 86,
+          "2023-01-29": 21,
+          "2023-01-30": 21
+        }
+        render json: res , status: :ok
+
       end
     end
   end

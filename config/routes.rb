@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   scope module: "api", path: "api" do
     scope module: "v1", path: "v1" do
       post "/login", to: "auth#create"
+      post 'password/forgot', to: 'password#forgot'
+      post 'password/reset', to: 'password#reset'
+      put 'password/update', to: 'password#update'
       resources :microposts
       resources :branches
       resources :employees
@@ -71,6 +74,9 @@ Rails.application.routes.draw do
           get :export_inventory, on: :collection
           get :export_order, on: :collection
           get :export_import_inventory, on: :collection
+        end
+        resources :batch_inventories do
+          get :get_all_expired, on: :collection
         end
       end
     end

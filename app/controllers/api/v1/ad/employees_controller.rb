@@ -11,7 +11,7 @@ module Api
         end
 
         def show
-          render json: @current_employee.as_json(
+          render json: @employee.as_json(
             include: { branch: { except: %i[id] } }
           ), status: :ok
         end

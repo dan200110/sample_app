@@ -9,7 +9,7 @@ module Api
         end
 
         def create
-          @admin = Admin.new admin_params
+          @admin = Employee.new admin_params.merge(role: "admin")
           if
             @admin.save!
             render json: @admin.as_json, status: :ok

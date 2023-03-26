@@ -32,10 +32,16 @@ class Inventory < ApplicationRecord
       j.merge!(category: category.as_json(except: %i[created_at updated_at]))
       j.merge!(batch_inventory: batch_inventory.as_json(except: %i[created_at updated_at]))
       j.merge!(supplier: supplier.as_json(except: %i[created_at updated_at]))
+      j.merge!(total_order_quantity: total_order_quantity)
+      j.merge!(created_date: created_at&.strftime('%Y-%m-%d'))
     end
   end
 
   def send_request_email_to_supplier
     InventoryMailer.send_request_mail_to_supplier(self).deliver_now
+  end
+
+  def total_order_quantity
+    order.sum(:total_quantity)
   end
 end

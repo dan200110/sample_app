@@ -75,9 +75,10 @@ ActiveRecord::Schema.define(version: 2023_03_17_142546) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.bigint "branch_id"
+    t.integer "role", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "branch_id"
     t.index ["branch_id"], name: "index_employees_on_branch_id"
   end
 

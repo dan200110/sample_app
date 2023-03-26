@@ -1,6 +1,7 @@
 class Employee < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
-  belongs_to :branch
+  belongs_to :branch, optional: true
+  enum role: {admin: 0, employee: 1}
   scope :latest_employee, ->{order(created_at: :desc)}
   scope :search_by_branch, lambda { |branch_id| where(branch_id: branch_id) if branch_id.present? }
   EMPLOYEE_ATTRS = %w(name email password password_confirmation branch_id).freeze
@@ -17,6 +18,7 @@ class Employee < ApplicationRecord
   validates :password, presence: true,
     length: {minimum: Settings.employee.password_validates.password_min_length}, if: :password, allow_nil: true
 
+  validates :branch_id, presence: true, if: :employee?
   has_secure_password
 
   class << self

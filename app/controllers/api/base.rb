@@ -20,7 +20,7 @@ module Api
       employee_id = JsonWebToken.decode(token)["employee_id"] if token
       @current_employee = Employee.find_by id: employee_id
       @current_branch = @current_employee&.branch
-      return if @current_employee
+      return if @current_employee && @current_employee.employee?
 
       render json: {
         message: ["You need to log in to use the app"],
@@ -31,9 +31,9 @@ module Api
 
     def authenticate_admin!
       token = request.headers['Authorization'].split(' ').last if request.headers['Authorization'].present?
-      admin_id = JsonWebToken.decode(token)["admin_id"] if token
-      @current_admin = Admin.find_by id: admin_id
-      return if @current_admin
+      employee_id = JsonWebToken.decode(token)["employee_id"] if token
+      @current_admin = Employee.find_by id: employee_id
+      return if @current_admin && @current_admin.admin?
 
       render json: {
         message: ["You need to log in to use the app"],

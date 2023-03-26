@@ -45,7 +45,7 @@ Rails.application.routes.draw do
         get :export_import_inventory, on: :collection
       end
       scope module: "ad", path: "ad" do
-        post "/login", to: "auth#create"
+        # post "/login", to: "auth#create"
         resources :admins
         resources :branches
         resources :employees

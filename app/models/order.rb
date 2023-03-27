@@ -29,4 +29,8 @@ class Order < ApplicationRecord
       j.merge!(created_date: created_at&.strftime('%Y-%m-%d'))
     end
   end
+
+  def get_revenue
+    total_price * total_quantity
+  end
 end

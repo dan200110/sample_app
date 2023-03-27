@@ -18,6 +18,33 @@ module Api
         }, status: :ok
       end
 
+      def header_statistic
+        @orders_month = @current_branch.order.time_between(Time.now.beginning_of_month, Time.now.end_of_month)
+        @order_month_count = @orders_month&.count
+        @order_month_price = @orders_month&.sum('total_price * total_quantity') || 0
+
+        @order_pre_month = @current_branch.order.time_between((Time.now - 1.month).beginning_of_month, (Time.now - 1.month).end_of_month)
+        @order_pre_month_price = @order_pre_month&.sum(:total_price) || 0
+        @order_percent_from_last_month = @order_pre_month_price == 0 ? 'N/A' : 100.0 * @order_month_price/@order_pre_month_price
+
+        @import_inventories_month = @current_branch.import_inventory.time_between(Time.now.beginning_of_month, Time.now.end_of_month)
+        @import_inventories_month_count = @import_inventories_month&.count
+        @import_inventories_month_price = @import_inventories_month&.sum('price * quantity') || 0
+
+        @im_pre_month = @current_branch.import_inventory.time_between((Time.now - 1.month).beginning_of_month, (Time.now - 1.month).end_of_month)
+        @im_pre_month_price = @im_pre_month&.sum('price * quantity') || 0
+        @im_percent_from_last_month = @im_pre_month_price == 0 ? 'N/A' : 100.0 * @import_inventories_month_price/@im_pre_month_price
+
+        render json: {
+          order_month_count: @order_month_count,
+          order_month_price: @order_month_price,
+          order_percent_from_last_month: @order_percent_from_last_month,
+          import_inventories_month_count: @import_inventories_month_count,
+          import_inventories_month_price: @import_inventories_month_price,
+          im_percent_from_last_month: @im_percent_from_last_month
+        }, status: :ok
+      end
+
       def get_order_by_day
         @order_by_day = Order.order_by_day
 
@@ -32,19 +59,7 @@ module Api
         else
           @revenue = @current_branch.order.revenue_day_chart
         end
-        # render json: @revenue , status: :ok
-        res = {
-          "2023-01-23": 100,
-          "2023-01-24": 500,
-          "2023-01-25": 125,
-          "2023-01-26": 250,
-          "2023-01-27": 158,
-          "2023-01-28": 86,
-          "2023-01-29": 21,
-          "2023-01-30": 21
-        }
-        render json: res , status: :ok
-
+        render json: @revenue , status: :ok
       end
     end
   end

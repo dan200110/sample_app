@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         get :get_order_by_day, on: :collection
         get :get_revenue_order, on: :collection
         get :get_total_import_inventory_price, on: :collection
+        get :header_statistic, on: :collection
       end
       resources :ledger
       resources :import_inventories
@@ -65,6 +66,7 @@ Rails.application.routes.draw do
           get :get_revenue_order, on: :collection
           get :get_total_import_inventory_price, on: :collection
           get :get_order_by_branch, on: :collection
+          get :header_statistic, on: :collection
         end
         resources :ledger
         resources :import_inventories

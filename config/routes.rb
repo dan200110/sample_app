@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       end
       resources :statistic do
         get :get_total_order_price, on: :collection
-        get :get_order_by_day, on: :collection
+        get :get_order_count, on: :collection
         get :get_revenue_order, on: :collection
         get :get_total_import_inventory_price, on: :collection
         get :header_statistic, on: :collection
@@ -62,7 +62,7 @@ Rails.application.routes.draw do
         end
         resources :statistic do
           get :get_total_order_price, on: :collection
-          get :get_order_by_day, on: :collection
+          get :get_order_count, on: :collection
           get :get_revenue_order, on: :collection
           get :get_total_import_inventory_price, on: :collection
           get :get_order_by_branch, on: :collection

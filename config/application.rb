@@ -18,5 +18,6 @@ module SampleApp
         resource '*', :headers => :any, :methods => [:get, :post, :put, :patch, :delete, :options, :head]
       end
     end
+    config.time_zone = 'Berlin'
   end
 end

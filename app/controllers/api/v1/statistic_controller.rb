@@ -45,16 +45,17 @@ module Api
         }, status: :ok
       end
 
-      def get_order_by_day
-        @order_by_day = Order.order_by_day
-
-        render json: @order_by_day , status: :ok
+      def get_order_count
+        if params[:type] == "month"
+          @order_count = Order.order_by_month
+        else
+          @order_count = Order.order_by_day
+        end
+        render json: @order_count , status: :ok
       end
 
       def get_revenue_order
-        if params[:type] == "week"
-          @revenue = @current_branch.order.revenue_week_chart
-        elsif params[:type] == "month"
+        if params[:type] == "month"
           @revenue = @current_branch.order.revenue_month_chart
         else
           @revenue = @current_branch.order.revenue_day_chart

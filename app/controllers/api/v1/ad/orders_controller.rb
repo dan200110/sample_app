@@ -7,7 +7,7 @@ module Api
         before_action :check_quantity, only: %i(create)
 
         def index
-          @orders = Order.search_by_branch(params["branch_id"])
+          @orders = Order.search_by_branch(params["branch_id"]).time_between(params[:start_date]&.to_time, params[:end_date]&.to_time)
           render json: @orders.as_json(
             include: {
               inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },

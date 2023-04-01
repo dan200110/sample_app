@@ -36,6 +36,8 @@ Rails.application.routes.draw do
         get :get_total_order_price, on: :collection
         get :get_order_count, on: :collection
         get :get_revenue_order, on: :collection
+        get :get_import_inventory_count, on: :collection
+        get :get_revenue_import_inventory, on: :collection
         get :get_total_import_inventory_price, on: :collection
         get :header_statistic, on: :collection
       end
@@ -47,6 +49,7 @@ Rails.application.routes.draw do
         get :export_inventory, on: :collection
         get :export_order, on: :collection
         get :export_import_inventory, on: :collection
+        get :export_ledger, on: :collection
       end
       scope module: "ad", path: "ad" do
         # post "/login", to: "auth#create"
@@ -67,6 +70,8 @@ Rails.application.routes.draw do
           get :get_total_import_inventory_price, on: :collection
           get :get_order_by_branch, on: :collection
           get :header_statistic, on: :collection
+          get :get_import_inventory_count, on: :collection
+          get :get_revenue_import_inventory, on: :collection
         end
         resources :ledger
         resources :import_inventories
@@ -76,6 +81,7 @@ Rails.application.routes.draw do
           get :export_inventory, on: :collection
           get :export_order, on: :collection
           get :export_import_inventory, on: :collection
+          get :export_ledger, on: :collection
         end
         resources :batch_inventories do
           get :get_all_expired, on: :collection

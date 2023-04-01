@@ -47,9 +47,9 @@ module Api
 
       def get_order_count
         if params[:type] == "month"
-          @order_count = Order.order_by_month
+          @order_count = @current_branch.order.order_by_month
         else
-          @order_count = Order.order_by_day
+          @order_count = @current_branch.order.order_by_day
         end
         render json: @order_count , status: :ok
       end
@@ -59,6 +59,24 @@ module Api
           @revenue = @current_branch.order.revenue_month_chart
         else
           @revenue = @current_branch.order.revenue_day_chart
+        end
+        render json: @revenue , status: :ok
+      end
+
+      def get_import_inventory_count
+        if params[:type] == "month"
+          @import_inventory_count = @current_branch.import_inventory.order_by_month
+        else
+          @import_inventory_count = @current_branch.import_inventory.order_by_day
+        end
+        render json: @import_inventory_count , status: :ok
+      end
+
+      def get_revenue_import_inventory
+        if params[:type] == "month"
+          @revenue = @current_branch.import_inventory.revenue_month_chart
+        else
+          @revenue = @current_branch.import_inventory.revenue_day_chart
         end
         render json: @revenue , status: :ok
       end

@@ -64,6 +64,35 @@ module Api
 
           send_data(result, filename: "import_inventories.csv", type: "text/csv", disposition: 'attachment')
         end
+
+        def export_ledger
+          @orders = Order.search_by_branch(params["branch_id"])
+          @import_inventories = ImportInventory.search_by_branch(params["branch_id"])
+
+          arr_order = @orders.map {|order|
+            order.as_json(only: %i[created_at]).merge(
+              {revenue: order.total_price * order.total_quantity, code: order&.order_code, type: "order"}
+            )
+          }
+
+          arr_import_inventory = @import_inventories.map {|import_inventory|
+            import_inventory.as_json(only: %i[created_at]).merge(
+              {revenue: import_inventory.price * import_inventory.quantity, code: import_inventory&.import_inventory_code, type: "import_inventory"}
+            )
+          }
+
+          @arr_result = arr_order + arr_import_inventory
+
+          header = ["form_code", "created_date", "type", "value"]
+          result = CSV.generate do |csv|
+            csv << header
+            @arr_result.each do |record|
+              csv << [record[:code], record[:created_date], record[:type], record[:revenue]]
+            end
+          end
+
+          send_data(result, filename: "ledger.csv", type: "text/csv", disposition: 'attachment')
+        end
       end
     end
   end

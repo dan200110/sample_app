@@ -5,7 +5,7 @@ module Api
       before_action :find_import_inventory, except: %i(create index)
 
       def index
-        @import_inventories = @current_branch.import_inventory
+        @import_inventories = @current_branch.import_inventory.time_between(params[:start_date]&.to_time, params[:end_date]&.to_time)
 
         render json: @import_inventories.as_json(
           include: {

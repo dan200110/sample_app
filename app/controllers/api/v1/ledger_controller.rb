@@ -4,8 +4,8 @@ module Api
       before_action :authenticate_employee!
 
       def index
-        @orders = @current_branch.order
-        @import_inventories = @current_branch.import_inventory
+        @orders = @current_branch.order.time_between(params[:start_date]&.to_time, params[:end_date]&.to_time)
+        @import_inventories = @current_branch.import_inventory.time_between(params[:start_date]&.to_time, params[:end_date]&.to_time)
 
         arr_order = @orders.map {|order|
           order.as_json(only: %i[created_at]).merge(

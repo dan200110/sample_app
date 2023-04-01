@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         get :get_expired, on: :collection
         get :get_out_of_stock, on: :collection
         get :send_request_mail_to_supplier, on: :collection
+        delete :destroy_all_expired, on: :collection
       end
       resources :statistic do
         get :get_total_order_price, on: :collection

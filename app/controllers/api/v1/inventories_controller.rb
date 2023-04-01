@@ -46,6 +46,16 @@ module Api
         }, status: :ok
       end
 
+      def destroy_all_expired
+        batch_expired = BatchInventory.get_expired.pluck :id
+
+        @expired_inventories = Inventory.where(batch_inventory_id: batch_expired, branch_id: @current_branch.id)
+        @expired_inventories.destroy_all
+        head :ok
+      rescue StandardError => e
+        render json: { errors: e.message }, status: :bad_request
+      end
+
       def get_out_of_stock
         quantity_left = params[:quantity_left].present? ? params[:quantity_left].to_i : 0
         @out_of_stock_inventories = Inventory.where(branch_id: @current_branch.id).get_out_of_stock(quantity_left)

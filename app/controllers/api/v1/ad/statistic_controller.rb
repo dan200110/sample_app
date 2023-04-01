@@ -25,8 +25,8 @@ module Api
           @order_month_price = @orders_month&.sum('total_price * total_quantity') || 0
 
           @order_pre_month = Order.search_by_branch(params["branch_id"]).time_between((Time.now - 1.month).beginning_of_month, (Time.now - 1.month).end_of_month)
-          @order_pre_month_price = @order_pre_month&.sum(:total_price) || 0
-          @order_percent_from_last_month = @order_pre_month_price == 0 ? 'N/A' : 100.0 * @order_month_price/@order_pre_month_price
+          @order_pre_month_price = @order_pre_month&.sum('total_price * total_quantity') || 0
+          @order_percent_from_last_month = @order_pre_month_price == 0 || @order_month_price == 0  ? 'N/A' : (@order_month_price - @order_pre_month_price) / 100.0
 
           @import_inventories_month = ImportInventory.search_by_branch(params["branch_id"]).time_between(Time.now.beginning_of_month, Time.now.end_of_month)
           @import_inventories_month_count = @import_inventories_month&.count
@@ -35,7 +35,7 @@ module Api
 
           @im_pre_month = ImportInventory.search_by_branch(params["branch_id"]).time_between((Time.now - 1.month).beginning_of_month, (Time.now - 1.month).end_of_month)
           @im_pre_month_price = @im_pre_month&.sum('price * quantity') || 0
-          @im_percent_from_last_month = @im_pre_month_price == 0 ? 'N/A' : 100.0 * @import_inventories_month_price/@im_pre_month_price
+          @im_percent_from_last_month = @im_pre_month_price == 0 || @import_inventories_month_price == 0 ? 'N/A' : (@import_inventories_month_price - @im_pre_month_price) / 100.0
 
           render json: {
             order_month_count: @order_month_count,

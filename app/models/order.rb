@@ -7,6 +7,7 @@ class Order < ApplicationRecord
   scope :time_between, lambda { |start_time, end_time|
     where(created_at: start_time..end_time) if start_time.present? && end_time.present?
   }
+  enum status: {pending: 1, complete: 0}
 
   # scope :order_by_day, (lambda do
   #   group_by_day(:created_at).count

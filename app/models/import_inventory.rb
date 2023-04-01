@@ -4,6 +4,8 @@ class ImportInventory < ApplicationRecord
   belongs_to :batch_inventory
   belongs_to :supplier
   belongs_to :employee, optional: true
+  
+  enum status: {pending: 1, complete: 0}
 
   scope :search_by_branch, lambda { |branch_id| where(branch_id: branch_id) if branch_id.present? }
   scope :time_between, lambda { |start_time, end_time|

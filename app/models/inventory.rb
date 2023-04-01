@@ -4,6 +4,7 @@ class Inventory < ApplicationRecord
   belongs_to :supplier, optional: true
   belongs_to :category, optional: true
   has_many :order
+  has_many :import_inventories
 
   enum inventory_type: { pill: 0, blister_packs: 1, pill_pack: 2, pill_bottle: 3 }
 

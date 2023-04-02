@@ -47,10 +47,11 @@ class Employee < ApplicationRecord
     self.reset_password_token = generate_token
     self.reset_password_sent_at = Time.now.utc
     save!
+    EmployeeMailer.password_reset(self).deliver_now
   end
 
   def password_token_valid?
-    (self.reset_password_sent_at + 4.hours) > Time.now.utc
+    (self.reset_password_sent_at + 1.hours) > Time.now.utc
   end
 
   def reset_password! password

@@ -44,7 +44,9 @@ Rails.application.routes.draw do
       end
       resources :ledger
       resources :import_inventories
-      resources :orders
+      resources :orders do
+        put :complete_order, on: :member
+      end
       resources :export_csv do
         get :export_employee, on: :collection
         get :export_inventory, on: :collection

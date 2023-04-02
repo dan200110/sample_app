@@ -6,7 +6,7 @@ module Api
         before_action :find_employee, except: %i(create index)
 
         def index
-          @employees = Employee.all
+          @employees = Employee.employee.search_by_branch(params["branch_id"])
           render json: @employees.as_json, status: :ok
         end
 

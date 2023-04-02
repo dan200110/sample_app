@@ -19,7 +19,7 @@ module Api
       def create
         @order = Order.new order_params.merge(order_code: generate_order_code, branch_id: @current_branch.id, employee_id: @current_employee.id)
         if @order.save!
-          reduce_inventory_quantity
+          reduce_inventory_quantity if @order.complete?
           render json: @order.as_json(
             include: {
               inventory: { only: %i[id inventory_code name price quantity main_ingredient producer] },
@@ -40,6 +40,17 @@ module Api
             employee: { except: %i[created_at updated_at] }
           }
         ), status: :ok
+      end
+
+      def complete_order
+        return render json: {message: "already complete order"}, status: :ok if @order.complete?
+
+        if @order.update status: "complete"
+          reduce_inventory_quantity
+          render json: @order.as_json, status: :ok
+        else
+          render json: { error: @order.errors }, status: :bad_request
+        end
       end
 
       private

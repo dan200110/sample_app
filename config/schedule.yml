@@ -1,0 +1,9 @@
+daily_get_expired_inventory_job:
+  cron: "* * * * *"
+  class: "DailyGetExpiredInventoryJob"
+  queue: "default"
+
+daily_get_out_of_stock_inventory_job:
+  cron: "* * * * *"
+  class: "DailyGetOutOfStockInventoryJob"
+  queue: "default"

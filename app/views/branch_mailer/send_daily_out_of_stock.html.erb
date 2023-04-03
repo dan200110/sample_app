@@ -1,0 +1,7 @@
+<h1>Hello <%= @branch.name%></h1>
+<h2>Today is <%= Date.today %></h2>
+<p>This is daily mail to list all of your out of stock inventory, please handle those</p>
+<%= @inventories.each do |inventory| %>
+  <h2>Inventory name: <%= inventory.name%>; inventory code: <%= inventory.inventory_code %> </h2>
+<% end %>
+<p>end</p>

@@ -7,4 +7,12 @@ class Branch < ApplicationRecord
   scope :order_by_branch, (lambda do
     joins(:order).group(:name).count
   end)
+
+  def send_daily_expired(inventories)
+    BranchMailer.send_daily_expired(self, inventories).deliver_now
+  end
+
+  def send_daily_out_of_stock(inventories)
+    BranchMailer.send_daily_out_of_stock(self, inventories).deliver_now
+  end
 end
